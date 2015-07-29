@@ -9,8 +9,10 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.transition.Explode;
 import android.transition.Fade;
@@ -31,6 +33,7 @@ public class MainActivity extends ActionBarActivity implements ViewPager.OnPageC
     MatchesFragment mMatchesFragment;
     private ImageView mChoosingImage;
     private ImageView mMatchesImage;
+    private ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,15 +49,40 @@ public class MainActivity extends ActionBarActivity implements ViewPager.OnPageC
 //            getFragmentManager().beginTransaction()
 //                    .add(R.id.container, new ChoosingFragment())
 //                    .commit();
-        ViewPager viewPager = (ViewPager)findViewById(R.id.pager);
-        viewPager.setAdapter(new PagerAdapter(getSupportFragmentManager()));
-        viewPager.setOnPageChangeListener(this);
+        mViewPager = (ViewPager)findViewById(R.id.pager);
+        mViewPager.setAdapter(new PagerAdapter(getSupportFragmentManager()));
+        mViewPager.setOnPageChangeListener(this);
 
         mChoosingImage = (ImageView)findViewById(R.id.title_icon);
+        mChoosingImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mViewPager.setCurrentItem(0);
+            }
+        });
         mMatchesImage = (ImageView)findViewById(R.id.chat_icon);
+        mMatchesImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mViewPager.setCurrentItem(1);
+            }
+        });
         mChoosingImage.setSelected(true);
         toggleColour(mChoosingImage);
         toggleColour(mMatchesImage);
+
+        DrawerLayout drawerLayout= (DrawerLayout)findViewById(R.id.drawer_layout);
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(
+                this,
+                drawerLayout,
+                toolbar,
+                R.string.open_drawer,
+                R.string.close_drawer
+        );
+        drawerLayout.setDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
     }
 
     @Override

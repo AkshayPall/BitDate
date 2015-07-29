@@ -13,4 +13,8 @@
     <string name="action_logout">Log Out</string>
     <string name="logo_to_card">logo_to_card</string>
     <string name="end_of_cardstack_message">No More Matches</string>
+
+    <!-- for the drawerlayout -->
+    <string name="open_drawer">Open</string>
+    <string name="close_drawer">Close</string>
 </resources>

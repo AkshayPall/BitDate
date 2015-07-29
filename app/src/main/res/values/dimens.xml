@@ -6,4 +6,5 @@
     <dimen name="cardstack_width">250dp</dimen>
     <dimen name="cardstack_height">300dp</dimen>
     <dimen name="cardstack_top_margin">20dp</dimen>
+    <dimen name="drawer_length">240dp</dimen>
 </resources>
