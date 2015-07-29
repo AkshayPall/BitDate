@@ -2,4 +2,8 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="selection_button_size">100dp</dimen>
+    <dimen name="cardstack_width">250dp</dimen>
+    <dimen name="cardstack_height">300dp</dimen>
+    <dimen name="cardstack_top_margin">20dp</dimen>
 </resources>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary_pink">#E91E63</color>
+    <color name="primary_pink_dark">#ffae1855</color>
+    <color name="primary_pink_light">#F8BBD0</color>
+
+    <color name="accent">#03A9F4</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#727272</color>
+    <color name="divider">#B6B6B6</color>
+
+    <color name="green_selection">#ACDC37</color>
+    <color name="green_selection_pressed">#89B02C</color>
+    <color name="red_selection">#FA4242</color>
+    <color name="red_selection_pressed">#C83434</color>
+</resources>
