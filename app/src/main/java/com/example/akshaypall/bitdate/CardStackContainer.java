@@ -35,7 +35,7 @@ public class CardStackContainer extends RelativeLayout implements View.OnTouchLi
     private CardView mTopCard;
     private CardView mBackCard;
 
-//    to track how many cards from the adapter have been swiped away
+    //    to track how many cards from the adapter have been swiped away
     private int mNextCardPosition = 0;
 
     private SwipeCallbacks mSwipeCallbacks;
@@ -73,8 +73,8 @@ public class CardStackContainer extends RelativeLayout implements View.OnTouchLi
     }
 
     private void addFrontCard() {
-        if (mAdapter.getCount() > 0 && mTopCard == null){
-            CardView cardView = mAdapter.getView(0,null,this);
+        if (mAdapter.getCount() > 0 && mTopCard == null) {
+            CardView cardView = mAdapter.getView(0, null, this);
             cardView.setCardElevation(8);
             cardView.setOnTouchListener(this);
             mTopCard = cardView;
@@ -84,8 +84,8 @@ public class CardStackContainer extends RelativeLayout implements View.OnTouchLi
     }
 
     private void addBackCard() {
-        if (mAdapter.getCount() > mNextCardPosition && mBackCard == null){
-            CardView cardView = mAdapter.getView(mNextCardPosition,null,this);
+        if (mAdapter.getCount() > mNextCardPosition && mBackCard == null) {
+            CardView cardView = mAdapter.getView(mNextCardPosition, null, this);
             cardView.setTranslationY(30);
             mBackCard = cardView;
             addView(cardView);
@@ -94,31 +94,34 @@ public class CardStackContainer extends RelativeLayout implements View.OnTouchLi
         bringChildToFront(mTopCard);
     }
 
-    private void swipeCard (boolean swipeRight){
-        int position = getPositionOfCardSwiped();
-        if (swipeRight){
-            mTopCard.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.slide_right));
-            if (mSwipeCallbacks != null) {
-                mSwipeCallbacks.onSwipedRight(mAdapter.getItem(position));
-            }
+    private void swipeCard(boolean swipeRight) {
+        if (mTopCard != null) {
+            int position = getPositionOfCardSwiped();
+            if (swipeRight) {
+                mTopCard.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.slide_right));
+                if (mSwipeCallbacks != null) {
+                    mSwipeCallbacks.onSwipedRight(mAdapter.getItem(position));
+                }
 
-        }else{
-            mTopCard.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.slide_left));
-            if (mSwipeCallbacks != null) {
-                mSwipeCallbacks.onSwipedLeft(mAdapter.getItem(position));
+            } else {
+                mTopCard.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.slide_left));
+                if (mSwipeCallbacks != null) {
+                    mSwipeCallbacks.onSwipedLeft(mAdapter.getItem(position));
+                }
             }
-        }
-        removeView(mTopCard);
-        mTopCard = null;
-        if (mBackCard != null) {
-            mBackCard.animate()
-                    .translationY(0)
-                    .setDuration(200);
-            mBackCard.setOnTouchListener(this);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) mBackCard.setElevation(8);
-            mTopCard = mBackCard;
-            mBackCard = null;
-            addBackCard();
+            removeView(mTopCard);
+            mTopCard = null;
+            if (mBackCard != null) {
+                mBackCard.animate()
+                        .translationY(0)
+                        .setDuration(200);
+                mBackCard.setOnTouchListener(this);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+                    mBackCard.setElevation(8);
+                mTopCard = mBackCard;
+                mBackCard = null;
+                addBackCard();
+            }
         }
     }
 
@@ -133,7 +136,7 @@ public class CardStackContainer extends RelativeLayout implements View.OnTouchLi
 
     private int getPositionOfCardSwiped() {
         int position;
-        if (mBackCard != null){
+        if (mBackCard != null) {
 //                the mnextposition counter is the card AFTER THE BACK CARD. so the top card in 2 indices behind that
             position = mNextCardPosition - 2;
         } else {
@@ -198,8 +201,9 @@ public class CardStackContainer extends RelativeLayout implements View.OnTouchLi
         }
     }
 
-    public interface SwipeCallbacks{
+    public interface SwipeCallbacks {
         public void onSwipedRight(User user);
+
         public void onSwipedLeft(User user);
     }
 }

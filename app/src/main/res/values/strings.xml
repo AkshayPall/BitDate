@@ -20,4 +20,6 @@
     <string name="log_out">Log Out</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="title_activity_chat">ChatActivity</string>
+    <string name="enter_message_hint">Enter a Message</string>
+    <string name="send_message_button">Send</string>
 </resources>

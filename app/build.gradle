@@ -17,6 +17,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE-FIREBASE.txt'
+        exclude 'META-INF/NOTICE'
+    }
 }
 
 dependencies {
@@ -29,4 +35,5 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.0'
     compile 'com.akshaypall.material:material:0.1.0'
     compile 'com.android.support:support-v4:22.0.0'
+    compile 'com.firebase:firebase-client-android:2.2.4+'
 }
