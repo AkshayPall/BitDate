@@ -1,10 +1,12 @@
 package com.example.akshaypall.bitdate;
 
 import com.parse.FindCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,6 +18,8 @@ public class ActionDataSource {
     public final static String COLUMN_BY_USER = "byUser";
     public final static String COLUMN_TO_USER = "toUser";
     private final static String COLUMN_TYPE = "type";
+    private final static String COLUMN_UPDATED_AT = "updatedAt";
+
     private final static String TYPE_LIKED = "liked";
     private final static String TYPE_SKIPPED = "skipped";
     private final static String TYPE_MATCHED = "matched";
@@ -55,5 +59,30 @@ public class ActionDataSource {
                 action.saveInBackground();
             }
         });
+    }
+
+    public static void getMatches(final ActionDataCallbacks actionDataCallbacks) {
+        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(TABLE_NAME);
+        query.whereEqualTo(COLUMN_BY_USER, UserDataSource.getCurrentUser().getmId());
+        query.whereEqualTo(COLUMN_TYPE, TYPE_MATCHED);
+        query.orderByDescending(COLUMN_UPDATED_AT);
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> list, ParseException e) {
+                if (e==null){
+                    List<String> matches = new ArrayList<String>();
+                    for (ParseObject object : list){
+                        matches.add(object.getString(COLUMN_TO_USER));
+                    }
+                    if (actionDataCallbacks != null){
+                        actionDataCallbacks.onFetchedMatches(matches);
+                    }
+                }
+            }
+        });
+    }
+
+    public interface ActionDataCallbacks {
+        public void onFetchedMatches (List<String> matchIds);
     }
 }

@@ -3,8 +3,18 @@
     android:layout_height="match_parent"
     tools:context="com.example.akshaypall.bitdate.MatchesFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <ListView
+        android:background="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/matches_list">
+    </ListView>
+
+    <ProgressBar
+        android:layout_width="@dimen/progressbar_size"
+        android:layout_height="@dimen/progressbar_size"
+        android:visibility="visible"
+        android:layout_gravity="center"
+        android:id="@+id/progressbar_matches"/>
 
 </FrameLayout>

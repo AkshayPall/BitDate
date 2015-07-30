@@ -2,10 +2,12 @@ package com.example.akshaypall.bitdate;
 
 import com.parse.ParseUser;
 
+import java.io.Serializable;
+
 /**
  * Created by Akshay Pall on 24/07/2015.
  */
-public class User {
+public class User implements Serializable {
 
     private String mFirstName;
     private String mPictureUrl;

@@ -75,6 +75,7 @@ public class SignInActivity extends ActionBarActivity implements View.OnTouchLis
                         } else {
                             //existing user successfully logged in
                             Log.d(TAG, "Login Successful: Existing user logged in");
+                            setResult(RESULT_OK);
                             finish();
                         }
                     }
@@ -120,6 +121,7 @@ public class SignInActivity extends ActionBarActivity implements View.OnTouchLis
                             public void done(ParseException e) {
                                 if (e == null) {
                                     Log.d(TAG, "New User created and logged in");
+                                    setResult(RESULT_OK);
                                     finish();
                                 }
                             }

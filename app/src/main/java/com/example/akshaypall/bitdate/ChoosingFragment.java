@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -26,6 +27,8 @@ public class ChoosingFragment extends Fragment implements UserDataSource.UserDat
     private CardAdapter mCardAdapter;
     private List<User> mUsers;
 
+    private ProgressBar mProgressBar;
+
     public ChoosingFragment() {
         // Required empty public constructor
     }
@@ -35,6 +38,10 @@ public class ChoosingFragment extends Fragment implements UserDataSource.UserDat
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_main, container, false);
+
+        //progress bar
+        mProgressBar = (ProgressBar)v.findViewById(R.id.progressbar_choosing);
+
         mCardStack = (CardStackContainer)v.findViewById(R.id.card_stack);
         UserDataSource.getUnseenUsers(this);
 
@@ -64,6 +71,7 @@ public class ChoosingFragment extends Fragment implements UserDataSource.UserDat
     public void onFetchedUsers(List<User> users) {
         mUsers.addAll(users);
         mCardAdapter.notifyDataSetChanged();
+        mProgressBar.setVisibility(ProgressBar.GONE);
     }
 
     @Override

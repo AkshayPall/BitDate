@@ -1,8 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer"
     android:layout_width="@dimen/drawer_length"
     android:layout_height="match_parent"
     android:layout_gravity="start"
-    android:background="@color/link_text_material_dark"
-    android:text="Test for DrawerLayout" />
+    android:orientation="vertical"
+    android:background="@android:color/white">
+
+    <com.example.akshaypall.material.RatioLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:ratio="1">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:src="@drawable/logo"
+                android:layout_width="match_parent"
+                android:scaleType="centerCrop"
+                android:layout_height="match_parent"
+                android:id="@+id/drawer_user_photo"/>
+            <TextView
+                android:layout_marginLeft="8dp"
+                android:id="@+id/drawer_user_name"
+                android:layout_marginBottom="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/drawer_user_photo"
+                android:text="Akshay Pall"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textColor="@android:color/white"/>
+        </RelativeLayout>
+    </com.example.akshaypall.material.RatioLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:text="@string/edit_profile"
+        android:textAppearance="@style/MessengerButtonText"
+        android:layout_height="@dimen/drawer_button_height"
+        android:textColor="@color/primary_pink"
+        style="?android:attr/borderlessButtonStyle"
+        android:background="@drawable/bottom_border"/>
+    <Button
+        android:layout_width="match_parent"
+        android:text="@string/log_out"
+        android:textAppearance="@style/MessengerButtonText"
+        android:layout_height="@dimen/drawer_button_height"
+        android:textColor="@color/primary_pink"
+        android:background="@drawable/bottom_border"
+        style="?android:attr/borderlessButtonStyle"/>
+
+</LinearLayout>

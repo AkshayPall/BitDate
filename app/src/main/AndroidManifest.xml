@@ -25,10 +25,14 @@
             </intent-filter>
         </activity>
         <activity android:name="com.facebook.FacebookActivity" />
-
         <activity
             android:name=".SignInActivity"
             android:label="@string/title_activity_sign_in" >
+        </activity>
+        <activity
+            android:theme="@style/ChatTheme"
+            android:name=".ChatActivity"
+            android:label="@string/title_activity_chat">
         </activity>
     </application>
 

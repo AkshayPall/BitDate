@@ -34,8 +34,17 @@ public class UserDataSource {
         return sCurrentUser;
     }
 
-    public static void clearCurrentUser(){
-        sCurrentUser = null;
+    public static void getUsersIn (List<String> ids, final UserDataCallbacks userDataCallbacks){
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query.whereContainedIn(COLUMN_USER_OBJECTID, ids);
+        query.findInBackground(new FindCallback<ParseUser>() {
+            @Override
+            public void done(List<ParseUser> list, ParseException e) {
+                if (e==null){
+                    formatCallback(list, userDataCallbacks);
+                }
+            }
+        });
     }
 
     public static void getUnseenUsers(final UserDataCallbacks callbacks){
@@ -58,11 +67,7 @@ public class UserDataSource {
                         @Override
                         public void done(List<ParseUser> list, ParseException e) {
                             if (e==null){
-                                List<User> toReturnUsers = new ArrayList<User>();
-                                for (ParseUser user : list) {
-                                    toReturnUsers.add(parseUserToUser(user));
-                                }
-                                callbacks.onFetchedUsers(toReturnUsers);
+                                formatCallback(list, callbacks);
                             }
                         }
                     });
@@ -71,12 +76,20 @@ public class UserDataSource {
         });
     }
 
+    private static void formatCallback(List<ParseUser> list, UserDataCallbacks callbacks) {
+        List<User> toReturnUsers = new ArrayList<User>();
+        for (ParseUser user : list) {
+            toReturnUsers.add(parseUserToUser(user));
+        }
+        callbacks.onFetchedUsers(toReturnUsers);
+    }
+
     private static User parseUserToUser (ParseUser parseUser) {
         User user = new User();
         user.setmFirstName(parseUser.getString(COLUMN_FIRST_NAME));
         user.setmPictureUrl(parseUser.getString(COLUMN_PICTURE_URL));
-        user.setmId(parseUser.getObjectId());
         user.setmFacebookId(parseUser.getString(COLUMN_FACEBOOKID));
+        user.setmId(parseUser.getObjectId());
         return user;
     }
 

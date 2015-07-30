@@ -17,4 +17,7 @@
     <!-- for the drawerlayout -->
     <string name="open_drawer">Open</string>
     <string name="close_drawer">Close</string>
+    <string name="log_out">Log Out</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="title_activity_chat">ChatActivity</string>
 </resources>

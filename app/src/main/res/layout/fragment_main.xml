@@ -43,4 +43,11 @@
             android:layout_height="@dimen/selection_button_size" />
     </LinearLayout>
 
+    <ProgressBar
+        android:layout_width="@dimen/progressbar_size"
+        android:layout_height="@dimen/progressbar_size"
+        android:visibility="visible"
+        android:layout_centerInParent="true"
+        android:id="@+id/progressbar_choosing"/>
+
 </RelativeLayout>
